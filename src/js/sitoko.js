@@ -1,6 +1,11 @@
 $('#customPrice').on('shown.bs.modal', 
    function() {
-      $('#inputCustomPrice').val('');
-	  $('#inputCustomPrice').focus();
+      $('#inputCustomPrice').val('').focus();
+   }
+);
+
+$('#deleteRowWarning').on('shown.bs.modal', 
+   function() {
+	  $('#confirmDeleteRowButton').focus();
    }
 );
