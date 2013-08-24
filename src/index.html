@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>SITOKO</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link rel="shortcut icon" href="/sitoko/img/favicon.ico" type="image/x-icon" />
+      <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <link href="css/sitoko.css" rel="stylesheet" media="screen">
+   </head>
+   <body>
+	  <nav id="navigation" class="container navbar navbar-default" role="navigation">
+         <ul class="nav nav-pills">
+		    <li><img src="img/sitoko-header-black.png" alt="SITOKO logo" class="img-responsive" /></li>
+		    <li>
+			   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong>Master</strong><span class="caret"></span></a>
+			   <ul class="dropdown-menu">
+			      <li><a href="#">Barang</a></li>
+				  <li><a href="#">Harga Barang</a></li>
+				  <li><a href="#">Impor Data Barang</a></li>
+				  <li><a href="#">Impor Data Harga Barang</a></li>
+			   </ul>
+			</li>
+			<li>
+			   <a class="dropdown-toggle" data-toggle="dropdown" href="#"><strong>Penjualan</strong><span class="caret"></span></a>
+			   <ul class="dropdown-menu">
+			      <li><a href="#">Transaksi Baru</a></li>
+				  <li><a href="#">Pembayaran</a></li>
+			   </ul>
+			</li>
+         </ul>
+	  </nav>
+	  
+	  <div class="container">
+	     <h4 class="text-center">Transaksi Penjualan</h4>
+		 <form class="form-inline form-horizontal" role="form">
+		    <div class="row">
+			   <div class="col-md-2 text-right">
+			      <label for="customer" class="control-label">Customer: </label>
+			   </div>
+			   <div class="col-md-2">
+			      <input type="text" id="customer" class="form-control input-sm" />
+			   </div>
+			   <div class="col-md-2 text-right">
+			      <label for="saleTransactionType" class="control-label">Jenis Penjualan: </label>
+			   </div>
+			   <div class="col-md-2">
+			      <select id="saleTransactionType" class="form-control input-sm">
+			         <option>KULAKAN</option>
+			         <option>ECERAN</option>
+			      </select>
+			   </div>
+			</div>
+			<div class="table-responsive">
+               <table id="saleTransactionTable" class="table table-striped table-bordered table-hover table-condensed">
+		          <thead>
+			         <tr>
+			            <th>No.</th>
+                        <th>Barcode</th>
+                        <th>Nama Barang</th>
+                        <th>Jumlah</th>
+                        <th>Satuan</th>
+                        <th>Harga per Satuan</th>
+                        <th>Harga Total</th>
+						<th></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td class="text-right">1.</td>
+				        <td><input type="text" class="form-control input-sm" name="itemBarcode[]" /><button class="btn btn-primary btn-xs">Cari</button></td>
+				        <td><input type="text" class="form-control input-sm" name="itemName[]" /></td>
+				        <td><input type="text" class="form-control input-sm" name="itemQuantity[]" /></td>
+				        <td class="text-center">
+                           <select class="form-control input-sm" name="itemUnit[]">
+	   		   		          <option>bungkus</option>
+    	   				      <option>pak</option>
+						      <option>dus</option>
+    					      <option>renteng</option>
+						      <option>lusin</option>
+                           </select>
+                        </td>
+				        <td class="text-right"><span id="itemPrice_1">10.000</span><br /><button class="btn btn-primary btn-xs">Isi Sendiri</button></td>
+				        <td class="text-right"><span id="itemPriceTotal_1">20.000</span></td>
+						<td class="text-center"><button class="btn btn-primary btn-xs">Hapus</button></td>
+                     </tr>
+			         <tr>
+                        <td class="text-right">2.</td>
+				        <td><input type="text" class="form-control input-sm" name="itemBarcode[]" /><button class="btn btn-primary btn-xs">Cari</button></td>
+				        <td><input type="text" class="form-control input-sm" name="itemName[]" /></td>
+				        <td><input type="text" class="form-control input-sm" name="itemQuantity[]" /></td>
+				        <td class="text-center">
+                           <select class="form-control input-sm" name="itemUnit[]">
+ 					          <option>bungkus</option>
+    					      <option>pak</option>
+						      <option>dus</option>
+    					      <option>renteng</option>
+						      <option>lusin</option>
+                           </select>
+                        </td>
+				        <td class="text-right"><span id="itemPrice_1">10.000</span><br /><button class="btn btn-primary btn-xs">Isi Sendiri</button></td>
+				        <td class="text-right"><span id="itemPriceTotal_1">20.000</span></td>
+						<td class="text-center"><button class="btn btn-primary btn-xs">Hapus</button></td>
+                     </tr>
+			         <tr>
+                        <td class="text-right">3.</td>
+				        <td><input type="text" class="form-control input-sm" name="itemBarcode[]" /><button class="btn btn-primary btn-xs">Cari</button></td>
+				        <td><input type="text" class="form-control input-sm" name="itemName[]" /></td>
+				        <td><input type="text" class="form-control input-sm" name="itemQuantity[]" /></td>
+				        <td class="text-center">
+                           <select class="form-control input-sm" name="itemUnit[]">
+					          <option>bungkus</option>
+    					      <option>pak</option>
+						      <option>dus</option>
+    					      <option>renteng</option>
+						      <option>lusin</option>
+                           </select>
+                        </td>
+				        <td class="text-right"><span id="itemPrice_1">10.000</span><br /><button class="btn btn-primary btn-xs">Isi Sendiri</button></td>
+				        <td class="text-right"><span id="itemPriceTotal_1">20.000</span></td>
+						<td class="text-center"><button class="btn btn-primary btn-xs">Hapus</button></td>
+                     </tr>
+                  </tbody>
+				  <tfoot>
+				     <tr>
+                        <td colspan="6" class="text-center"><strong>HARGA TOTAL</strong></td>
+				        <td class="text-right"><strong>20.000.000</strong></td>
+						<td class="text-center"><button class="btn btn-primary btn-xs">Tambah Baris</button></td>
+                     </tr>
+				  </tfoot>
+               </table>
+			</div>
+			
+			<div id="paymentPanel" class="row">
+			   <div class="col-md-4 text-right">
+			      <label for="salePayment">Pembayaran: </label>
+			   </div>
+			   <div class="col-md-2">
+			      <input type="text" id="salePayment" class="form-control" />
+			   </div>
+			   <div class="col-md-6">
+			      <label>&nbsp;&nbsp;Kembalian: <label>
+			      <span id="exchange">(5.300)</span>
+			   </div>
+			</div>
+			<br />
+			<div id="buttonPanel" class="text-center">
+			   <button class="btn btn-primary">Cetak Struk</button>
+			   <button class="btn btn-primary">Simpan Transaksi</button>
+			</div>
+         </form>
+      </div>    
+	  
+	  <div id="footer" class="container">
+	     <div class="row">
+	        <div class="col-md-4 text-left">
+               <a href="http://seagatesoft.com" target="_new">
+                  <img src="img/sitoko-header-black-small.png" alt="Sitoko" border="0" />
+			   </a>
+			   <br />Sistem Informasi Toko
+            </div>
+		    <div class="col-md-4 text-center"><p>Copyright © 2013. SeaGateSoft.</p></div>
+		    <div class="col-md-4 text-right">
+               <a href="http://seagatesoft.com" target="_new">
+                  <img src="img/nuevasystem-small.png" alt="Nuevasystem" border="0" />
+               </a>
+            </div>
+		 </div>
+      </div>
+
+      <script src="js/jquery-2.0.3.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+   </body>
+</html>

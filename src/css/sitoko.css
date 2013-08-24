@@ -1,0 +1,10 @@
+#saleTransactionTable th{
+   background-color: #e6e6e6;
+   text-align: center;
+}
+
+#footer {
+   margin-top: 25px;
+   padding: 10px;
+   border: 1px solid #cccccc;
+}
