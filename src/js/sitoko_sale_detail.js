@@ -36,9 +36,14 @@ SalePage.validateQuantity = function(event) {
    var saleDetail = SalePage.sale.saleDetailsMap.get(rowKey);
 
    if (VALIDATOR.validatePositiveInteger(saleDetail.quantity)) {
-      $('#errorMessage').removeClass('alert alert-danger').text('');
+	  $('#quantityDanger-'+rowKey).remove();
    } else {
-      $('#errorMessage').addClass('alert alert-danger').text('Input jumlah barang tidak valid!');
+	  if ($('#quantityDanger-'+rowKey).length == 0) {
+	     var messageHtml = '<p id="quantityDanger-{rowKey}" class="alert alert-danger">Input jumlah barang pada baris {rowNumber} tidak valid!</p>';
+	     var substitute = {'rowKey': rowKey};
+	     substitute.rowNumber = SalePage.sale.saleDetailsMap.getKeyIndex(rowKey)+1;
+	     $('#errorMessage').append(SalePage.substitute(messageHtml, substitute));
+      }
 	  $(event.target).addClass('alert alert-danger');
    }
 };
@@ -95,6 +100,7 @@ SalePage.deleteSaleDetailRow =  function(event) {
    $('#saleDetail-'+rowKey).slideUp('500', function() {$('#saleDetail-'+rowKey).remove()});
    $('#deleteRowWarning').modal('hide');
    SalePage.updateTotalPrice();
+   $('#-'+rowKey).remove();
    
    if (rowKey != SalePage.lastSaleDetailKey) {
       SalePage.restartRowNumbering();
@@ -117,10 +123,12 @@ SalePage.validatePayment = function(event) {
    var payment = parseFloat($(event.target).val());
 
    if (isNaN(payment) || !VALIDATOR.validateNonNegativeNumber(payment)) {
-      $('#errorMessage').addClass('alert alert-danger').text('Input pembayaran tidak valid!');
+	  if ($('#paymentDanger').length == 0) {
+	     $('#errorMessage').append('<p id="paymentDanger" class="alert alert-danger">Input pembayaran tidak valid</p>');
+      }	  
 	  $(event.target).addClass('alert alert-danger');
    } else {
-      $('#errorMessage').removeClass('alert alert-danger').text('');
+	  $('#paymentDanger').remove();
    }
 };
 SalePage.removePaymentDanger = function(event) {

@@ -73,6 +73,10 @@ function Map(entries) {
 	  Map.prototype.getValues = function() {
 	     return this._values;
 	  };
+	  
+	  Map.prototype.getKeyIndex = function(key) {
+	     return this._keys.indexOf(key);
+	  };
    }
    
    Map._initialized = true;
