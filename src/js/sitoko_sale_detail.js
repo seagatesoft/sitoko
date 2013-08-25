@@ -116,6 +116,7 @@ SalePage.restartRowNumbering = function() {
 };
 SalePage.updateExchange = function(event) {
    var payment = parseFloat($(event.target).val());
+   SalePage.sale.payment = payment;
    var exchange = payment - SalePage.sale.getTotalPrice();
    $('#exchange').text(MONEY.display(exchange));
 };
