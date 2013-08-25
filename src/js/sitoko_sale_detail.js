@@ -12,8 +12,7 @@ SalePage.lastSaleDetailKey = -1;
 // declare Page event handlers
 SalePage.updateTotalPrice = function() {
    var totalPrice = SalePage.sale.getTotalPrice();
-   var payment = parseFloat($('#payment').val());
-   var exchange = (isNaN(payment) ? 0 : payment) - totalPrice;
+   var exchange = parseFloat($('#payment').val()) - totalPrice;
    $('#totalPrice').text(MONEY.display(totalPrice));
    $('#exchange').text(MONEY.display(exchange));
 };
@@ -109,6 +108,24 @@ SalePage.restartRowNumbering = function() {
       $('#itemNumber-'+rowKeys[index]).text(index+1);
    }
 };
+SalePage.updateExchange = function(event) {
+   var payment = parseFloat($(event.target).val());
+   var exchange = payment - SalePage.sale.getTotalPrice();
+   $('#exchange').text(MONEY.display(exchange));
+};
+SalePage.validatePayment = function(event) {
+   var payment = parseFloat($(event.target).val());
+
+   if (isNaN(payment) || !VALIDATOR.validateNonNegativeNumber(payment)) {
+      $('#errorMessage').addClass('alert alert-danger').text('Input pembayaran tidak valid!');
+	  $(event.target).addClass('alert alert-danger');
+   } else {
+      $('#errorMessage').removeClass('alert alert-danger').text('');
+   }
+};
+SalePage.removePaymentDanger = function(event) {
+   $(event.target).removeClass('alert alert-danger');
+}
 
 // EVENT BINDINGS
 // quantity updated
@@ -126,6 +143,10 @@ $('#addRowButton').click(SalePage.addSaleDetailRow);
 $(document).on('click', '.deleteRowButton', null, SalePage.confirmDeleteSaleDetailRow);
 // delete row
 $('#confirmDeleteRowButton').click(SalePage.deleteSaleDetailRow);
+// payment updated
+$('#payment').focus(SalePage.removePaymentDanger);
+$('#payment').change(SalePage.updateExchange);
+$('#payment').blur(SalePage.validatePayment);
 
 // Boostrap customization
 $('#customPriceModal').on('shown.bs.modal', 
