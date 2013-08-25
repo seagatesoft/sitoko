@@ -317,35 +317,6 @@ function Validator() {
    
    Validator._initialized = true;
 }
-
-/** 
- * UIModel class
- */
-function UIModel(selector, value) {
-   this.selector = selector;
-   this.value = value;
-   
-   if (typeof UIModel._initialized === 'undefined') {
-      UIModel.prototype.setSelector = function(selector) {
-	     this.selector = selector;
-	  };
-	  
-	  UIModel.prototype.updateValue = function(value) {
-	     this.value = value;
-	  };
-	  
-	  UIModel.prototype.updateUI = function() {
-	     $(this.selector).val(this.value);
-	  };
-	  
-	  UIModel.prototype.updateValueAndUI = function(value) {
-	     this.value = value;
-		 this.updateUI();
-	  };
-   }
-   
-   UIModel._initialized = true;
-}
  
 /** 
  * Page class
