@@ -35,19 +35,21 @@
 		 <form class="form-inline form-horizontal" role="form">
 		    <div class="row">
 			   <div class="col-md-2 text-right">
-			      <label for="customer" class="control-label">Customer: </label>
+			      <label for="customer-name" class="control-label">Customer: </label>
 			   </div>
 			   <div class="col-md-2">
-			      <input type="text" id="customer" class="form-control input-sm" />
+			      <input type="text" id="customer-name" class="form-control input-sm" />
 			   </div>
 			   <div class="col-md-2 text-right">
-			      <label for="saleTransactionType" class="control-label">Jenis Penjualan: </label>
+			      <label for="saleType" class="control-label">Jenis Penjualan: </label>
 			   </div>
 			   <div class="col-md-2">
-			      <select id="saleTransactionType" class="form-control input-sm">
+			      <select id="saleType" class="form-control input-sm">
 			         <option>KULAKAN</option>
 			         <option>ECERAN</option>
 			      </select>
+			   </div>
+			   <div id="errorMessage" class="col-md-4 text-center">
 			   </div>
 			</div>
 			<div class="table-responsive">
@@ -64,71 +66,12 @@
 						<th></th>
                      </tr>
                   </thead>
-                  <tbody>
-                     <tr>
-                        <td class="text-right">1.</td>
-				        <td><input type="text" class="form-control input-sm" name="itemBarcode[]" /><button class="btn btn-primary btn-xs">Cari</button></td>
-				        <td><input type="text" class="form-control input-sm" name="itemName[]" /></td>
-				        <td><input type="text" class="form-control input-sm" name="itemQuantity[]" /></td>
-				        <td class="text-center">
-                           <select class="form-control input-sm" name="itemUnit[]">
-	   		   		          <option>bungkus</option>
-    	   				      <option>pak</option>
-						      <option>dus</option>
-    					      <option>renteng</option>
-						      <option>lusin</option>
-                           </select>
-                        </td>
-				        <td class="text-right">
-						   <span id="itemPrice_1">10.000</span>
-						   <br />
-						   <button data-toggle="modal" data-target="#customPrice" class="btn btn-primary btn-xs">Isi Sendiri</a>
-						</td>
-				        <td class="text-right"><span id="itemPriceTotal_1">20.000</span></td>
-						<td class="text-center"><button data-toggle="modal" data-target="#deleteRowWarning" class="btn btn-primary btn-xs">Hapus</button></td>
-                     </tr>
-			         <tr>
-                        <td class="text-right">2.</td>
-				        <td><input type="text" class="form-control input-sm" name="itemBarcode[]" /><button class="btn btn-primary btn-xs">Cari</button></td>
-				        <td><input type="text" class="form-control input-sm" name="itemName[]" /></td>
-				        <td><input type="text" class="form-control input-sm" name="itemQuantity[]" /></td>
-				        <td class="text-center">
-                           <select class="form-control input-sm" name="itemUnit[]">
- 					          <option>bungkus</option>
-    					      <option>pak</option>
-						      <option>dus</option>
-    					      <option>renteng</option>
-						      <option>lusin</option>
-                           </select>
-                        </td>
-				        <td class="text-right"><span id="itemPrice_1">10.000</span><br /><button class="btn btn-primary btn-xs">Isi Sendiri</button></td>
-				        <td class="text-right"><span id="itemPriceTotal_1">20.000</span></td>
-						<td class="text-center"><button class="btn btn-primary btn-xs">Hapus</button></td>
-                     </tr>
-			         <tr>
-                        <td class="text-right">3.</td>
-				        <td><input type="text" class="form-control input-sm" name="itemBarcode[]" /><button class="btn btn-primary btn-xs">Cari</button></td>
-				        <td><input type="text" class="form-control input-sm" name="itemName[]" /></td>
-				        <td><input type="text" class="form-control input-sm" name="itemQuantity[]" /></td>
-				        <td class="text-center">
-                           <select class="form-control input-sm" name="itemUnit[]">
-					          <option>bungkus</option>
-    					      <option>pak</option>
-						      <option>dus</option>
-    					      <option>renteng</option>
-						      <option>lusin</option>
-                           </select>
-                        </td>
-				        <td class="text-right"><span id="itemPrice_1">10.000</span><br /><button class="btn btn-primary btn-xs">Isi Sendiri</button></td>
-				        <td class="text-right"><span id="itemPriceTotal_1">20.000</span></td>
-						<td class="text-center"><button class="btn btn-primary btn-xs">Hapus</button></td>
-                     </tr>
-                  </tbody>
+                  <tbody id="saleTableBody"></tbody>
 				  <tfoot>
 				     <tr>
                         <td colspan="6" class="text-center"><strong>HARGA TOTAL</strong></td>
-				        <td class="text-right"><strong>20.000.000</strong></td>
-						<td class="text-center"><button class="btn btn-primary btn-xs">Tambah Baris</button></td>
+				        <td class="text-right"><strong id="totalPrice">0</strong></td>
+						<td class="text-center"><button id="addRowButton" type="button" class="btn btn-primary btn-xs">Tambah Baris</button></td>
                      </tr>
 				  </tfoot>
                </table>
@@ -136,20 +79,20 @@
 			
 			<div id="paymentPanel" class="row">
 			   <div class="col-md-4 text-right">
-			      <label for="salePayment">Pembayaran: </label>
+			      <label for="payment">Pembayaran: </label>
 			   </div>
 			   <div class="col-md-2">
-			      <input type="text" id="salePayment" class="form-control" />
+			      <input type="text" id="payment" class="form-control" />
 			   </div>
 			   <div class="col-md-6">
 			      <label>&nbsp;&nbsp;Kembalian: <label>
-			      <span id="exchange">(5.300)</span>
+			      <span id="exchange"></span>
 			   </div>
 			</div>
 			<br />
 			<div id="buttonPanel" class="text-center">
-			   <button class="btn btn-primary">Cetak Struk</button>
-			   <button class="btn btn-primary">Simpan Transaksi</button>
+			   <button id="printReceiptButton" type="button" class="btn btn-primary">Cetak Struk</button>
+			   <button id="saveSaleButton" type="button" class="btn btn-primary">Simpan Transaksi</button>
 			</div>
          </form>
       </div>    
@@ -171,7 +114,39 @@
 		 </div>
       </div>
 	  
-	  <div id="customPrice" class="modal fade" role="dialog" aria-hidden="true" aria-labelledby="customPriceLabel" tabindex="-1">
+	  <table style="display: none">
+	     <tbody id="saleDetailTemplate">
+	        <tr id="saleDetail-{rowKey}">
+               <td id="itemNumber-{rowKey}" class="text-right">{rowNumber}</td>
+               <td>
+                  <input id="itemBarcode-{rowKey}" type="text" class="form-control input-sm itemBarcodeInput" />
+                  <button id="barcodeButton-{rowKey}" type="button" value="{rowKey}" class="btn btn-primary btn-xs barcodeButton">Cari</button>
+               </td>
+               <td><input id="itemName-{rowKey}" type="text" class="form-control input-sm itemNameInput" /></td>
+               <td><input id="quantity-{rowKey}" type="text" class="form-control input-sm quantityInput" value="1" /></td>
+               <td class="text-center">
+                  <select id="unitId-{rowKey}" class="form-control input-sm unitSelect">
+                     <option value="0">bungkus</option>
+                     <option value="1">pak</option>
+                     <option value="2">dus</option>
+                     <option value="3">renteng</option>
+                     <option value="4">lusin</option>
+                  </select>
+               </td>
+			   <td class="text-right">
+			      <span id="pricePerUnit-{rowKey}">0</span>
+			      <br />
+			      <button id="customPriceButton-{rowKey}" type="button" value="{rowKey}" class="btn btn-primary btn-xs customPriceButton">Isi Sendiri</button>
+			   </td>
+			   <td class="text-right"><span id="pricePerItemTotal-{rowKey}">0</span></td>
+			   <td class="text-center">
+			      <button id="deleteRowButton-{rowKey}" type="button" value="{rowKey}" class="btn btn-primary btn-xs deleteRowButton">Hapus</button>
+			   </td>
+            </tr>
+		 </tbody>
+	  </table>
+
+	  <div id="customPriceModal" class="modal fade" role="dialog" aria-hidden="true" aria-labelledby="customPriceLabel" tabindex="-1">
 	     <div class="modal-dialog">
 		    <div class="modal-content">
 			   <div class="modal-header">
@@ -179,13 +154,13 @@
 				  <h5 id="customPriceLabel" class="modal-title">Harga Spesial</h5>
 			   </div>
 			   <div class="modal-body">
-			      <form role="form">
+			      <form id="customPriceForm" role="form" onsubmit="return false;">
 				     <input id="inputCustomPrice" type="text" class="form-control input-sm" />
 				  </form>
 			   </div>
 			   <div class="modal-footer">
-			      <button type="button" class="btn btn-primary btn-xs">Set Harga</button>
-				  <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Batal</button>
+			      <button id="setCustomPriceButton" type="button" class="btn btn-primary btn-xs">Set Harga</button>
+				  <button id="cancelCustomPriceButton" type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Batal</button>
 			   </div>
 			</div>
 		 </div>
@@ -212,5 +187,7 @@
       <script src="js/jquery-2.0.3.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
 	  <script src="js/sitoko.js"></script>
+	  <script src="js/sitoko_sale.js"></script>
+	  <script src="js/sitoko_sale_detail.js"></script>
    </body>
 </html>
