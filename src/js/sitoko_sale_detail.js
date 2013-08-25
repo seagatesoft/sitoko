@@ -95,6 +95,7 @@ SalePage.deleteSaleDetailRow =  function(event) {
    
    $('#saleDetail-'+rowKey).slideUp('500', function() {$('#saleDetail-'+rowKey).remove()});
    $('#deleteRowWarning').modal('hide');
+   SalePage.updateTotalPrice();
    
    if (rowKey != SalePage.lastSaleDetailKey) {
       SalePage.restartRowNumbering();
