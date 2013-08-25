@@ -3,9 +3,8 @@ var MONEY = new Money;
 var VALIDATOR = new Validator;
 var SalePage = new Page;
 // declare Data Model
-SalePage.sale = new Sale();
-SalePage.sale.saleDetailsMap = new Map();
-SalePage.sale.saleDetailsMap.put(0, new SaleDetail(null, '', '', 1, 0, 0, false));
+SalePage.sale = new Sale;
+SalePage.sale.saleDetailsMap = new Map;
 // declare Page state variables
 SalePage.lastSaleDetailKey = -1;
 
