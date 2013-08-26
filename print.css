@@ -1,0 +1,34 @@
+body
+{
+ font-size: 10pt;
+}
+
+table, td
+{
+border-style: ridge;
+border-collapse: collapse;
+table-layout: fixed;
+font-size: 10pt;
+}
+
+th
+{
+border-style: ridge;
+color: #445566;
+}
+
+.alignCenter
+{
+text-align: center;
+}
+
+.alignRight
+{
+text-align: right;
+}
+
+.sumColumn
+{
+font-weight: bold;
+text-decoration: underline;
+}

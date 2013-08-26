@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>SITOKO</title>
+	  <link href="css/print.css" rel="stylesheet" media="screen">
+	  <link href="css/print.css" rel="stylesheet" media="print">
+   </head>
+   <body>
+      <span>Sale ID: {transactionId}, {time}. Customer: {customerName}</span>
+      <table>
+         <thead>
+            <tr>
+	           <th>No.</th>
+		       <th>ID</th>
+		       <th>Barang</th>
+		       <th>Jumlah</th>
+		       <th>Satuan</th>
+		       <th>Harga</th>
+		       <th>Total</th>
+	        </tr>
+         </thead>
+         <tbody>
+            <tr>
+	           <td>{rowNumber}</td>
+		       <td>{itemId}</td>
+		       <td>{itemName}</td>
+		       <td>{quantity}</td>
+		       <td>{unitName}</td>
+		       <td>{pricePerUnit}</td>
+		       <td>{totalPricePerUnit}</td>
+	        </tr>
+         </tbody>
+         <tfoot>
+            <tr>
+               <td colspan="6"><strong>HARGA TOTAL</strong></td>
+		       <td><strong>{totalPrice}</strong></td>
+	        </tr>
+	        <tr>
+	           <td colspan="6"><strong>PEMBAYARAN</strong></td>
+		       <td><strong>{payment}</strong></td>
+	        </tr>
+	        <tr>
+	           <td colspan="6"><strong>KEMBALIAN</strong></td>
+		       <td><strong>{exchange}</strong></td>
+	        </tr>
+         </tfoot>
+      </table>
+   </body>
+<html>
