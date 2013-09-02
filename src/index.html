@@ -38,15 +38,15 @@
 			      <label for="customer-name" class="control-label">Customer: </label>
 			   </div>
 			   <div class="col-md-2">
-			      <input type="text" id="customer-name" class="form-control input-sm" />
+			      <input type="text" id="customerName" class="form-control input-sm" />
 			   </div>
 			   <div class="col-md-2 text-right">
 			      <label for="saleType" class="control-label">Jenis Penjualan: </label>
 			   </div>
 			   <div class="col-md-2">
 			      <select id="saleType" class="form-control input-sm">
-			         <option>KULAKAN</option>
-			         <option>ECERAN</option>
+			         <option value="KULAKAN">KULAKAN</option>
+			         <option value="ECERAN">ECERAN</option>
 			      </select>
 			   </div>
 			   <div id="errorMessage" class="col-md-4 text-center">
@@ -184,10 +184,65 @@
 		 </div>
 	  </div>
 	  
+	  <table style="display: none;">
+         <thead id="tablePrintHeader">
+            <tr>
+			   <th colspan="7"><strong>{STORE_NAME}</strong></th>
+			</tr>
+			<tr>
+			   <td colspan="7">{saleId} - {customerName} - {saleType}</td>
+			</tr>
+			<tr>
+			   <td colspan="7">{time}</td>
+			</tr>
+            <tr>
+	           <th>No.</th>
+		       <th>ID</th>
+		       <th>Barang</th>
+		       <th>Jumlah</th>
+		       <th>Satuan</th>
+		       <th>Harga</th>
+		       <th>Total</th>
+	        </tr>
+         </thead>
+         <tbody id="tablePrintBody">
+            <tr>
+	           <td class="alignRight">{rowNumber}.</td>
+		       <td class="alignRight">{itemId}</td>
+		       <td>{itemName}</td>
+		       <td class="alignRight">{quantity}</td>
+		       <td>{unitName}</td>
+		       <td class="alignRight">{pricePerUnit}</td>
+		       <td class="alignRight">{totalPricePerUnit}</td>
+	        </tr>
+         </tbody>
+         <tfoot id="tablePrintFooter">
+            <tr>
+               <td colspan="6" class="alignCenter"><strong>HARGA TOTAL</strong></td>
+		       <td class="alignRight"><strong>{totalPrice}</strong></td>
+	        </tr>
+	        <tr>
+	           <td colspan="6" class="alignCenter"><strong>PEMBAYARAN</strong></td>
+		       <td class="alignRight"><strong>{payment}</strong></td>
+	        </tr>
+	        <tr>
+	           <td colspan="6" class="alignCenter"><strong>KEMBALIAN</strong></td>
+		       <td class="alignRight"><strong>{exchange}</strong></td>
+	        </tr>
+         </tfoot>
+      </table>
+	  
       <script src="js/jquery-2.0.3.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
 	  <script src="js/sitoko.js"></script>
 	  <script src="js/sitoko_sale.js"></script>
 	  <script src="js/sitoko_sale_detail.js"></script>
+	  <script type="text/javascript">
+	     SalePage.unitTypes.put(0, 'bungkus');
+		 SalePage.unitTypes.put(1, 'pak');
+		 SalePage.unitTypes.put(2, 'dus');
+		 SalePage.unitTypes.put(3, 'renteng');
+		 SalePage.unitTypes.put(4, 'lusin');
+	  </script>
    </body>
 </html>

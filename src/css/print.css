@@ -1,0 +1,35 @@
+/*
+ * TODO: fixed page and table width
+ */
+body {
+ width: 90%;
+ background-color: #ffffff;
+ color: #000000;
+ font-size: 10pt;
+}
+
+table {
+ table-layout: fixed;
+ border-collapse: collapse;
+}
+
+th {
+ background-color: #dddddd;
+ border-style: solid;
+ border-width: 1pt;
+}
+
+td {
+ border-style: solid;
+ border-width: 1pt;
+}
+
+.alignCenter
+{
+text-align: center;
+}
+
+.alignRight
+{
+text-align: right;
+}

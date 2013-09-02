@@ -5,6 +5,7 @@ var SalePage = new Page;
 // declare Data Model
 SalePage.sale = new Sale;
 SalePage.sale.saleDetailsMap = new Map;
+SalePage.unitTypes = new Map;
 // declare Page state variables
 SalePage.lastSaleDetailKey = -1;
 
@@ -133,7 +134,58 @@ SalePage.validatePayment = function(event) {
 };
 SalePage.removePaymentDanger = function(event) {
    $(event.target).removeClass('alert alert-danger');
-}
+};
+SalePage.updateSaleType = function(event) {
+   SalePage.sale.saleType = $(event.target).val();
+};
+SalePage.updateItemName = function(event) {
+   var splitted = $(event.target).attr('id').split('-');
+   var rowKey = parseInt(splitted[1]);
+   var saleDetail = SalePage.sale.saleDetailsMap.get(rowKey);
+   saleDetail.itemName = $(event.target).val();
+};
+SalePage.updateUnitId = function(event) {
+   var splitted = $(event.target).attr('id').split('-');
+   var rowKey = parseInt(splitted[1]);
+   var saleDetail = SalePage.sale.saleDetailsMap.get(rowKey);
+   saleDetail.unitId = $(event.target).val();
+};
+SalePage.printReceipt = function() {
+   // TODO: validate data
+   var receiptPageOpen = '<!DOCTYPE html><html><head><title>SITOKO</title><link href="css/print.css" rel="stylesheet" media="screen"><link href="css/print.css" rel="stylesheet" media="print"></head><body><table><thead>';
+   var receiptPageClose = '</tfoot></table></body></html>';
+   
+   var tableHeaderSubstitutes = {'STORE_NAME': 'TOKO BU TITIK', 'time': SalePage.formatDateTime(new Date())};
+   tableHeaderSubstitutes['saleId'] = SalePage.sale.saleId == undefined ? '' : SalePage.sale.saleId;
+   tableHeaderSubstitutes['saleType'] = SalePage.sale.saleType == undefined ? $('#saleType').val() : SalePage.sale.saleType;
+   tableHeaderSubstitutes['customerName'] = SalePage.sale.customerName == undefined ? $('#customerName').val() : SalePage.sale.customerName;
+   var tableHeader = SalePage.substitute($('#tablePrintHeader').html(), tableHeaderSubstitutes);
+   
+   var totalPrice = SalePage.sale.getTotalPrice();
+   var exchange = SalePage.sale.payment-totalPrice;
+   var tableFooterSubstitutes = {'totalPrice': MONEY.display(totalPrice)};
+   tableFooterSubstitutes['payment'] = SalePage.sale.payment ? MONEY.display(SalePage.sale.payment) : '-';
+   tableFooterSubstitutes['exchange'] = isNaN(exchange) ? '-' : MONEY.display(exchange);
+   var tableFooter = SalePage.substitute($('#tablePrintFooter').html(), tableFooterSubstitutes);
+   
+   var receiptPage = receiptPageOpen + tableHeader + '</thead><tbody>';
+   var tableBody = $('#tablePrintBody').html();
+   var rowValues = SalePage.sale.saleDetailsMap.getValues();
+   var rowValuesCount = rowValues.length;
+   
+   for (var index=0; index<rowValuesCount; index++) {
+      var saleDetail = rowValues[index];
+      var tableBodySubstitutes = {'rowNumber': (index+1), 'itemId': saleDetail.itemId, 'itemName': saleDetail.itemName, 'quantity': saleDetail.quantity, 'unitName': SalePage.unitTypes.get(saleDetail.unitId), 'pricePerUnit': MONEY.display(saleDetail.pricePerUnit), 'totalPricePerUnit': MONEY.display(saleDetail.getTotalPrice())};
+	  receiptPage = receiptPage + SalePage.substitute(tableBody, tableBodySubstitutes);
+   }
+   
+   receiptPage = receiptPage + '</tbody>' + tableFooter + receiptPageClose;
+   var receiptWindow = window.open('', '', 'left=300, top=200, width=700, height=400, toolbar=no, resizeable=no, menubar=no, location=no');
+   receiptWindow.document.open();
+   receiptWindow.document.write(receiptPage);
+   receiptWindow.document.close();
+   receiptWindow.print();
+};
 
 // EVENT BINDINGS
 // quantity updated
@@ -155,6 +207,13 @@ $('#confirmDeleteRowButton').click(SalePage.deleteSaleDetailRow);
 $('#payment').focus(SalePage.removePaymentDanger);
 $('#payment').change(SalePage.updateExchange);
 $('#payment').blur(SalePage.validatePayment);
+$('#printReceiptButton').click(SalePage.printReceipt);
+// sale type changed
+$('#saleType').change(SalePage.updateSaleType);
+// item name changed
+$(document).on('change', '.itemNameInput', null, SalePage.updateItemName);
+// unit id changed
+$(document).on('change', '.unitSelect', null, SalePage.updateUnitId);
 
 // Boostrap customization
 $('#customPriceModal').on('shown.bs.modal', 

@@ -322,9 +322,15 @@ function Validator() {
  * Page class
  */
 function Page() {
+   var monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
    if (typeof Page._initialized === 'undefined') {
       Page.prototype.substitute = function(input, substitution) {
 	     return input.replace(/{(\w+)}/g, function(match, submatch) { return substitution[submatch];});
+      };
+	  
+	  Page.prototype.formatDateTime = function(dateTime) {
+	     return dateTime.getDate() + ' ' + monthNames[dateTime.getMonth()] + ' ' + dateTime.getFullYear() + ', ' + dateTime.getHours() + ':' + dateTime.getMinutes();
       };
    }
    
