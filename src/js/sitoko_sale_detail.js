@@ -148,7 +148,7 @@ SalePage.updateUnitId = function(event) {
    var splitted = $(event.target).attr('id').split('-');
    var rowKey = parseInt(splitted[1]);
    var saleDetail = SalePage.sale.saleDetailsMap.get(rowKey);
-   saleDetail.unitId = $(event.target).val();
+   saleDetail.unitId = parseInt($(event.target).val());
 };
 SalePage.printReceipt = function() {
    // TODO: validate data
