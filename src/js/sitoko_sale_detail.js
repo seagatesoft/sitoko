@@ -155,9 +155,9 @@ SalePage.printReceipt = function() {
    var receiptPageOpen = '<!DOCTYPE html><html><head><title>SITOKO</title><link href="css/print.css" rel="stylesheet" media="screen"><link href="css/print.css" rel="stylesheet" media="print"></head><body><table><thead>';
    var receiptPageClose = '</tfoot></table></body></html>';
    
-   var tableHeaderSubstitutes = {'STORE_NAME': 'TOKO BU TITIK', 'time': SalePage.formatDateTime(new Date())};
+   var tableHeaderSubstitutes = {'time': SalePage.formatDateTime(new Date())};
    tableHeaderSubstitutes['saleId'] = SalePage.sale.saleId == undefined ? '' : SalePage.sale.saleId;
-   tableHeaderSubstitutes['saleType'] = SalePage.sale.saleType == undefined ? $('#saleType').val() : SalePage.sale.saleType;
+   //tableHeaderSubstitutes['saleType'] = SalePage.sale.saleType == undefined ? $('#saleType').val() : SalePage.sale.saleType;
    tableHeaderSubstitutes['customerName'] = SalePage.sale.customerName == undefined ? $('#customerName').val() : SalePage.sale.customerName;
    var tableHeader = SalePage.substitute($('#tablePrintHeader').html(), tableHeaderSubstitutes);
    
