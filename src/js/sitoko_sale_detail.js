@@ -168,7 +168,8 @@ SalePage.printReceipt = function() {
    tableFooterSubstitutes['exchange'] = isNaN(exchange) ? '-' : MONEY.display(exchange);
    var tableFooter = SalePage.substitute($('#tablePrintFooter').html(), tableFooterSubstitutes);
    
-   var receiptPage = receiptPageOpen + tableHeader + '</thead><tbody>';
+   var receiptPageArray = [];
+   receiptPageArray.push(receiptPageOpen, tableHeader, '</thead><tbody>');
    var tableBody = $('#tablePrintBody').html();
    var rowValues = SalePage.sale.saleDetailsMap.getValues();
    var rowValuesCount = rowValues.length;
@@ -176,13 +177,13 @@ SalePage.printReceipt = function() {
    for (var index=0; index<rowValuesCount; index++) {
       var saleDetail = rowValues[index];
       var tableBodySubstitutes = {'rowNumber': (index+1), 'itemId': saleDetail.itemId, 'itemName': saleDetail.itemName, 'quantity': saleDetail.quantity, 'unitName': SalePage.unitTypes.get(saleDetail.unitId), 'pricePerUnit': MONEY.display(saleDetail.pricePerUnit), 'totalPricePerUnit': MONEY.display(saleDetail.getTotalPrice())};
-	  receiptPage = receiptPage + SalePage.substitute(tableBody, tableBodySubstitutes);
+	   receiptPageArray.push(SalePage.substitute(tableBody, tableBodySubstitutes));
    }
    
-   receiptPage = receiptPage + '</tbody>' + tableFooter + receiptPageClose;
+   receiptPageArray.push('</tbody>', tableFooter, receiptPageClose)
    var receiptWindow = window.open('', '', 'left=300, top=200, width=700, height=400, toolbar=no, resizeable=no, menubar=no, location=no');
    receiptWindow.document.open();
-   receiptWindow.document.write(receiptPage);
+   receiptWindow.document.write(receiptPageArray.join(''));
    receiptWindow.document.close();
    receiptWindow.print();
 };
