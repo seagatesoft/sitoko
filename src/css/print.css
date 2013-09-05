@@ -1,6 +1,14 @@
 /*
  * TODO: fixed page and table width
  */
+ @media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
 body {
  width: 90%;
  background-color: #ffffff;

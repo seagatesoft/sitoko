@@ -153,7 +153,7 @@ SalePage.updateUnitId = function(event) {
 SalePage.printReceipt = function() {
    // TODO: validate data
    var receiptPageOpen = '<!DOCTYPE html><html><head><title>SITOKO</title><link href="css/print.css" rel="stylesheet" media="screen"><link href="css/print.css" rel="stylesheet" media="print"></head><body><table><thead>';
-   var receiptPageClose = '</tfoot></table></body></html>';
+   var receiptPageClose = '</tfoot></table><button type="button" id="closeButton" class="no-print" onclick="window.close();">Tutup</button></body></html>';
    
    var tableHeaderSubstitutes = {'time': SalePage.formatDateTime(new Date())};
    tableHeaderSubstitutes['saleId'] = SalePage.sale.saleId == undefined ? '' : SalePage.sale.saleId;
@@ -180,12 +180,14 @@ SalePage.printReceipt = function() {
 	   receiptPageArray.push(SalePage.substitute(tableBody, tableBodySubstitutes));
    }
    
-   receiptPageArray.push('</tbody>', tableFooter, receiptPageClose)
+   receiptPageArray.push('</tbody>', tableFooter, receiptPageClose);
    var receiptWindow = window.open('', '', 'left=300, top=200, width=700, height=400, toolbar=no, resizeable=no, menubar=no, location=no');
    receiptWindow.document.open();
    receiptWindow.document.write(receiptPageArray.join(''));
    receiptWindow.document.close();
+   receiptWindow.document.getElementById('closeButton').focus();
    receiptWindow.print();
+   //html2canvas(receiptWindow.document.getElementById('receiptTable'), {onrendered: function(canvas) {receiptWindow.document.getElementById('renderedReceipt').appendChild(canvas);}});
 };
 
 // EVENT BINDINGS
