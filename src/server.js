@@ -21,8 +21,8 @@ app.post('/sale/saveTransaction', function(req, res) {
    var saleData = req.body;
    // TODO: validate data
 
-   db.saveSaleTransaction(saleData, function (err) {
-      var transactionResultStatus = {'success': true};
+   db.saveSaleTransaction(saleData, function (err, saleId) {
+      var transactionResultStatus = {'success': true, 'saleId': saleId};
       
 	  if (err) {
 	     transactionResultStatus.success = false;

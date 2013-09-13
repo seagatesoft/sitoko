@@ -135,7 +135,7 @@ exports.saveSaleTransaction = function(saleData, callback) {
 			   if (err) {
 			      callback(err);
 			   } else {
-			      callback();
+			      callback(null, saleId);
 			   }
 			});
 		 }
@@ -148,7 +148,7 @@ exports.saveSaleTransaction = function(saleData, callback) {
 		 if (err) {
 			callback(err);
 		 } else {
-		    callback();
+		    callback(null, saleId);
 		 }
 	  }
    );

@@ -363,6 +363,7 @@ SalePage.saveTransaction = function() {
       .done(function (data) {
 	     $('#savingLoader').modal('hide');
 		 if (data.success) {
+		    SalePage.sale.saleId = data.saleId;
 		    // disable all input except print button
 			$('#newSaleForm').find(':input').prop('disabled', true);
 			$('#printReceiptButton').prop('disabled', false);
