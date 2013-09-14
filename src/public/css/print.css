@@ -9,11 +9,16 @@
     }
 }
 
+* {
+	margin: 0;
+	padding: 0;
+}
+
 body {
- width: 90%;
+ width: 75mm;
  background-color: #ffffff;
  color: #000000;
- font-size: 10pt;
+ font-size: 8pt;
 }
 
 table {
@@ -40,4 +45,32 @@ text-align: center;
 .alignRight
 {
 text-align: right;
+}
+
+.lineNumberColumn {
+ width: 5mm;
+}
+		       
+.itemIdColumn {
+ width: 5mm;
+}
+
+.itemColumn {
+ width: 15mm;
+}
+
+.quantityColumn {
+ width: 5mm;
+}
+
+.unitColumn {
+ width: 9mm;
+}
+
+.priceColumn {
+ width: 13mm;
+}
+
+.totalPriceColumn {
+ width: 13mm;
 }
